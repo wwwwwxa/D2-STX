@@ -76,7 +76,7 @@ QUVARepetitionDataset/
 # --- Main training & visualization scripts (public) ---
 !video_counting_train.py
 !pose_counting_train.py
-!frame_STfusionmodel_Visualization.py
+!frame_STfusionmodel_main.py
 
 # --- Data loaders (public) ---
 !Repcount_multishot_loader.py

@@ -18,7 +18,7 @@ This codebase provides three training/evaluation pipelines for video repetition 
 |--------|----------|-------------|
 | `video_counting_train.py` | Video only | Trains a VideoMAE-based exemplar counting model |
 | `pose_counting_train.py` | Pose only | Trains a PoseMAE-based exemplar counting model |
-| `frame_STfusionmodel_Visualization.py` | Video + Pose | Three-stage training of the D²-STX spatiotemporal cross-modal fusion model, with attention visualization |
+| `frame_STfusionmodel_main.py` | Video + Pose | Three-stage training of the D²-STX spatiotemporal cross-modal fusion model |
 
 ---
 
@@ -136,7 +136,7 @@ python pose_counting_train.py \
 **Stage 1 — Train video encoder:**
 
 ```bash
-python frame_STfusionmodel_Visualization.py \
+python frame_STfusionmodel_main.py \
     --training_stage 1 \
     --dataset RepCount \
     --tokens_dir saved_VideoMAEtokens_RepCount \
@@ -152,7 +152,7 @@ python frame_STfusionmodel_Visualization.py \
 **Stage 2 — Train pose encoder:**
 
 ```bash
-python frame_STfusionmodel_Visualization.py \
+python frame_STfusionmodel_main.py \
     --training_stage 2 \
     --stage1_checkpoint saved_models_repcount/fusion/best_obo_XXX_stage1_epochXXX.pyth \
     --dataset RepCount \
@@ -169,7 +169,7 @@ python frame_STfusionmodel_Visualization.py \
 **Stage 3 — Train fusion module:**
 
 ```bash
-python frame_STfusionmodel_Visualization.py \
+python frame_STfusionmodel_main.py \
     --training_stage 3 \
     --stage1_checkpoint saved_models_repcount/fusion/best_obo_XXX_stage1_epochXXX.pyth \
     --stage2_checkpoint saved_models_repcount/fusion/best_obo_XXX_stage2_epochXXX.pyth \
@@ -205,10 +205,10 @@ python video_counting_train.py \
     --only_test
 ```
 
-### D²-STX fusion model with attention visualization
+### D²-STX fusion model
 
 ```bash
-python frame_STfusionmodel_Visualization.py \
+python frame_STfusionmodel_main.py \
     --dataset RepCount \
     --tokens_dir saved_VideoMAEtokens_RepCount \
     --exemplar_dir exemplar_VideoMAEtokens_RepCount \
@@ -216,12 +216,8 @@ python frame_STfusionmodel_Visualization.py \
     --pose_exemplar_dir exemplar_PoseMAEtokens_RepCount \
     --trained_model saved_models_repcount/fusion/xxx.pyth \
     --multishot --iterative_shots \
-    --only_test \
-    --enable_attention_visualization \
-    --attention_save_dir attention_visualizations/
+    --only_test
 ```
-
-Visualizations are saved under `attention_visualizations/`, including spatial cross-attention (video→pose) and temporal cross-attention (video↔pose) maps.
 
 ---
 
