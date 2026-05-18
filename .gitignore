@@ -1,0 +1,93 @@
+# ===== Virtual environment & IDE =====
+.venv/
+.idea/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# ===== Model weights =====
+*.pyth
+*.pth
+!weights/FSC147.pth
+
+# ===== Data directories (not included in repo) =====
+data/
+RepCount_pose/
+poselabel_datasets/
+
+# ===== Training logs =====
+log/
+logs/
+wandb/
+
+# ===== Saved model checkpoints (keep folder, not weights) =====
+saved_models_repcount/**/*.pyth
+saved_tokens/
+saved_models/
+checkpoints/
+exemplar_tokens/
+exemplar_tokens_reencoded/
+saved_tokens_reencoded/
+saved_models_new/
+saved_models_fulldata/
+saved_models_countix/
+saved_models_randomness/
+saved_models_randomness_new/
+saved_models_randomness_lowcounts/
+saved_models_randomness_batchsize8/
+saved_models_repcountfull/
+saved_models_subset/
+saved_models_nonormalizationbycounts/
+saved_models_v+p_repcountfull/
+
+# ===== Output directories =====
+gt_density_maps/
+gt_density_maps_recreated/
+predictions/
+plots/
+countix_density_maps/
+repcount_density_maps/
+results/
+attention_visualizations/
+density_visualizations*/
+
+# ===== Other excluded directories =====
+pytorchvideo/
+detectron2/
+node_modules/
+selected_videos/
+QUVARepetitionDataset/
+
+# ===== File types to exclude =====
+*.npz
+*.zip
+*.mp4
+*.out
+*.tar.gz
+
+# ===== Chinese-named temp directory =====
+删除无人开头结尾片段/
+
+# ===== Private Python scripts (root level only) =====
+# Exclude all root-level .py files, then explicitly keep the public ones
+/*.py
+
+# --- Main training & visualization scripts (public) ---
+!video_counting_train.py
+!pose_counting_train.py
+!frame_STfusionmodel_Visualization.py
+
+# --- Data loaders (public) ---
+!Repcount_multishot_loader.py
+!Repcountpose_multishot_loader.py
+!Repcount_fusion_loader.py
+!Countix_multishot_loader.py
+!UCFRep_multishot_loader.py
+
+# --- Model modules (public) ---
+!video_mae_cross_full_attention.py
+!pose_mae_cross_full_attention.py
+!frame_spatialtemporal_1111_fusion.py
+!Attention_visualizer.py
+!model_crossvit_window_attention.py

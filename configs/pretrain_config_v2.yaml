@@ -1,0 +1,19 @@
+num_gpus: 1
+dataset: RepCount
+
+tokens_dir: /media/Disk3/xiaoaiwang/xiaoaiwang/saved_VideoSwintokens_RepCount/
+exemplar_dir: /media/Disk3/xiaoaiwang/exemplar_VideoSwintokens_RepCount/
+
+pose_tokens_dir: /media/m22t/media/xiaoaiwang/EveryShotCounts-main/Repcount_pose/pose_saved_tokens
+pose_exemplar_dir: /media/m22t/media/xiaoaiwang/EveryShotCounts-main/Repcount_pose/pose_exemplar_tokens
+
+save_path: saved_models_repcount/0721_p+v_2
+
+token_pool_ratio: 0.4
+multishot: True
+iterative_shots: True
+
+lr: 5e-5
+encodings: swin
+threshold: 0.4
+

@@ -1,0 +1,43 @@
+# feeder
+feeder: feeders.feeder_RepCount.Feeder
+train_feeder_args:
+  data_path: joint
+  label_path: train
+  debug: False
+  random_choose: True
+  random_shift: False
+  random_move: False
+  window_size: 64
+  normalization: False
+  repeat: 1
+
+test_feeder_args:
+  data_path: joint
+  label_path: val
+  debug: False
+
+# model
+model: model.ctrgcn.Model_lst_4part_RepCount
+model_args:
+  num_class: 64
+  num_point: 25
+  num_person: 1
+  graph: graph.RepCount.Graph
+  graph_args:
+    labeling_mode: 'spatial'
+  head: ['ViT-B/32']
+  k: 6
+
+# optim
+weight_decay: 0.01
+base_lr: 1e-4
+lr_decay_rate: 0.5
+step: [50, 100, 150]
+
+# training
+device: 0
+batch_size: 64
+test_batch_size: 128
+num_epoch: 200
+nesterov: True
+warm_up_epoch: 10
