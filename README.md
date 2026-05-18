@@ -1,10 +1,12 @@
-# [YOUR METHOD NAME]: [YOUR PAPER TITLE]
+# D²-STX: Decoupling Spatial-temporal Cross-attention for Dual-branch Repetitive Action Counting
 
-**[Your Name(s)]**
+**Xiaoai Wang, Hang Wang, Yan Liu, Huan Hu, Bruce X.B. Yu\***
+
+*(\* Corresponding author)*
 
 [[Paper]](#) | [[Project Page]](#)
 
-> **Note**: This repository extends [ESCounts (ACCV 2024)](https://github.com/sinhasaptarshi/EveryShotCounts) with pose-based counting and spatiotemporal cross-modal fusion.
+> **Note**: This repository extends [ESCounts (ACCV 2024)](https://github.com/sinhasaptarshi/EveryShotCounts) with pose-based counting and a decoupled spatiotemporal cross-modal fusion module.
 
 ---
 
@@ -16,7 +18,7 @@ This codebase provides three training/evaluation pipelines for video repetition 
 |--------|----------|-------------|
 | `video_counting_train.py` | Video only | Trains a VideoMAE-based exemplar counting model |
 | `pose_counting_train.py` | Pose only | Trains a PoseMAE-based exemplar counting model |
-| `frame_STfusionmodel_Visualization.py` | Video + Pose | Three-stage training of a spatiotemporal cross-modal fusion model, with attention visualization |
+| `frame_STfusionmodel_Visualization.py` | Video + Pose | Three-stage training of the D²-STX spatiotemporal cross-modal fusion model, with attention visualization |
 
 ---
 
@@ -86,7 +88,7 @@ This creates `saved_VideoMAEtokens_RepCount/` and `exemplar_VideoMAEtokens_RepCo
 
 ### Pose features
 
-Extract pose tokens (replace paths with your pose encoder):
+Extract pose tokens using the pose encoder:
 
 ```bash
 python save_swim_features.py --dataset RepCount --model PoseMAE \
@@ -99,7 +101,7 @@ This creates `saved_PoseMAEtokens_RepCount/` and `exemplar_PoseMAEtokens_RepCoun
 
 ## Training
 
-### 1. Video-only model
+### 1. Video-only branch
 
 ```bash
 python video_counting_train.py \
@@ -114,7 +116,7 @@ python video_counting_train.py \
     --use_tensorboard True
 ```
 
-### 2. Pose-only model
+### 2. Pose-only branch
 
 ```bash
 python pose_counting_train.py \
@@ -129,7 +131,7 @@ python pose_counting_train.py \
     --use_tensorboard True
 ```
 
-### 3. Spatiotemporal fusion model (three-stage)
+### 3. D²-STX fusion model (three-stage)
 
 **Stage 1 — Train video encoder:**
 
@@ -190,7 +192,7 @@ Supported `--fusion_mode` values: `pose_as_query`, `video_as_query`, `bidirectio
 
 ## Testing
 
-### Video / Pose models
+### Video / Pose branch
 
 ```bash
 python video_counting_train.py \
@@ -203,7 +205,7 @@ python video_counting_train.py \
     --only_test
 ```
 
-### Fusion model with attention visualization
+### D²-STX fusion model with attention visualization
 
 ```bash
 python frame_STfusionmodel_Visualization.py \
@@ -219,7 +221,7 @@ python frame_STfusionmodel_Visualization.py \
     --attention_save_dir attention_visualizations/
 ```
 
-Visualizations are saved under `attention_visualizations/`, grouped by spatial and temporal attention directions.
+Visualizations are saved under `attention_visualizations/`, including spatial cross-attention (video→pose) and temporal cross-attention (video↔pose) maps.
 
 ---
 
@@ -229,9 +231,9 @@ Download our pretrained checkpoints:
 
 | Model | Dataset | OBO | MAE | Download |
 |-------|---------|-----|-----|----------|
-| Video model | RepCount | [FILL] | [FILL] | [link] |
-| Pose model  | RepCount | [FILL] | [FILL] | [link] |
-| Fusion model | RepCount | [FILL] | [FILL] | [link] |
+| Video branch | RepCount | [FILL] | [FILL] | [link] |
+| Pose branch  | RepCount | [FILL] | [FILL] | [link] |
+| D²-STX fusion | RepCount | [FILL] | [FILL] | [link] |
 
 Place downloaded `.pyth` files under `saved_models_repcount/`.
 
@@ -242,11 +244,11 @@ Place downloaded `.pyth` files under `saved_models_repcount/`.
 If you find this work helpful, please cite our paper:
 
 ```bibtex
-@inproceedings{[yourcitation],
-  title   = {[YOUR PAPER TITLE]},
-  author  = {[AUTHORS]},
-  booktitle = {[VENUE]},
-  year    = {[YEAR]},
+@inproceedings{wang2026d2stx,
+  title     = {D$^2$-STX: Decoupling Spatial-temporal Cross-attention for Dual-branch Repetitive Action Counting},
+  author    = {Wang, Xiaoai and Wang, Hang and Liu, Yan and Hu, Huan and Yu, Bruce X.B.},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026},
 }
 ```
 
