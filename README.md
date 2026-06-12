@@ -6,7 +6,7 @@
 
 [[Paper]](#) | [[Project Page]](#)
 
-> **Note**: This repository extends [ESCounts (ACCV 2024)](https://github.com/sinhasaptarshi/EveryShotCounts) with pose-based counting and a decoupled spatiotemporal cross-modal fusion module.
+
 
 ---
 
@@ -88,12 +88,9 @@ This creates `saved_VideoMAEtokens_RepCount/` and `exemplar_VideoMAEtokens_RepCo
 
 ### Pose features
 
-Extract pose tokens using the pose encoder:
-
-```bash
-python save_swim_features.py --dataset RepCount --model PoseMAE \
-    --num_gpus 1 --data_path data/RepCount
-```
+The pose feature extraction code will be released soon. In the meantime, 
+pre-extracted pose features are available upon request — please contact 
+xiaoai.23@intl.zju.edu.cn.
 
 This creates `saved_PoseMAEtokens_RepCount/` and `exemplar_PoseMAEtokens_RepCount/`.
 
@@ -225,11 +222,11 @@ python frame_STfusionmodel_main.py \
 
 Download our pretrained checkpoints:
 
-| Model | Dataset | OBO | MAE | Download |
-|-------|---------|-----|-----|----------|
-| Video branch | RepCount | [FILL] | [FILL] | [link] |
-| Pose branch  | RepCount | [FILL] | [FILL] | [link] |
-| D²-STX fusion | RepCount | [FILL] | [FILL] | [link] |
+| Model | Dataset | OBO | MAE | 
+|-------|---------|-----|-----|
+| Video branch | RepCount | [0.403] | [0.298] | 
+| Pose branch  | RepCount | [0.173] | [0.843] | 
+| D²-STX fusion | RepCount | [0.500] | [0.255] | 
 
 Place downloaded `.pyth` files under `saved_models_repcount/`.
 
@@ -240,21 +237,14 @@ Place downloaded `.pyth` files under `saved_models_repcount/`.
 If you find this work helpful, please cite our paper:
 
 ```bibtex
-@inproceedings{wang2026d2stx,
-  title     = {D$^2$-STX: Decoupling Spatial-temporal Cross-attention for Dual-branch Repetitive Action Counting},
-  author    = {Wang, Xiaoai and Wang, Hang and Liu, Yan and Hu, Huan and Yu, Bruce X.B.},
-  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year      = {2026},
+@inproceedings{wang2026d,
+  title={D\^{} 2-STX: Decoupling Spatial-Temporal Cross-Attention for Dual-branch Repetitive Action Counting},
+  author={Wang, Xiaoai and Wang, Hang and Liu, Yan and Hu, Huan and Yu, Bruce XB},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={8205--8214},
+  year={2026}
 }
 ```
 
-This work builds on [ESCounts](https://arxiv.org/abs/2403.18074):
-
-```bibtex
-@InProceedings{sinha2024every,
-  title     = {Every Shot Counts: Using Exemplars for Repetition Counting in Videos},
-  author    = {Sinha, Saptarshi and Stergiou, Alexandros and Damen, Dima},
-  booktitle = {Proceedings of the Asian Conference on Computer Vision (ACCV)},
-  year      = {2024},
-}
-```
+## Acknowledgement
+We would like to thank the authors of the following repository for their excellent work: [ESCounts](https://arxiv.org/abs/2403.18074).
